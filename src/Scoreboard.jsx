@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
+import PlayerRow from './PlayerRow.jsx';
 
-class Scoreboard extends Component {
+class Scoreboard extends Component <IScoreboardProps> {
+    constructor(props) {
+        super(props);
+    
+        this.changePlayerDetails = this.changePlayerDetails.bind(this);
+    }
+    
+    changePlayerDetails(player) {
+        this.props.setPlayerDetails(this.props.players);
+    }
+    
     render() {
         return (
             <table>
@@ -13,22 +24,8 @@ class Scoreboard extends Component {
                     <th>Games</th>
                     <th>Sets</th>
                 </tr>
-                <tr>
-                    <td>*</td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="text"/></td>
-                    <td><input type="text"/></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
+                <PlayerRow player={this.props.players[0]} changePlayerDetails={this.changePlayerDetails} />
+                <PlayerRow player={this.props.players[1]} changePlayerDetails={this.changePlayerDetails} />
             </table>
         )
     }
